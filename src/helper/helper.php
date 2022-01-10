@@ -9,7 +9,7 @@ if (!function_exists('capcha_create')) {
             return (new \Kaadon\CapCha\capcha())->create($config);
 
         } catch (\Exception $e) {
-            return throw new \Kaadon\CapCha\CapchaException($e->getMessage());
+            throw new \Kaadon\CapCha\CapchaException($e->getMessage());
         }
     }
 }
@@ -22,7 +22,7 @@ if (!function_exists('capcha_check')) {
             return (new \Kaadon\CapCha\capcha())->check($verify_id, $verify_code);
 
         } catch (\Exception $e) {
-            return throw new \Kaadon\CapCha\CapchaException($e->getMessage());
+            throw new \Kaadon\CapCha\CapchaException($e->getMessage());
         }
     }
 }
