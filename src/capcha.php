@@ -59,10 +59,9 @@ class capcha
      * 配置验证码
      * @param string|null $config
      */
-    protected function configure(string $config = null): void
+    protected function configure(): void
     {
-        $config = Config::get('captcha', []);
-
+        $config = Config::get('kaadon_captcha', []);
         foreach ($config as $key => $val) {
             if (property_exists($this, $key)) {
                 $this->{$key} = $val;
@@ -319,7 +318,7 @@ class capcha
      *
      * @return array
      */
-    public function verify()
+    public function capcha_create()
     {
         $verify = $this->create();
 

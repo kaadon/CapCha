@@ -21,6 +21,16 @@
   "autoload": {
     "psr-4": {
       "Kaadon\\CapCha\\": "src"
+    },
+    "files": [
+      "src/helper/helper.php"
+    ]
+  },
+  "extra": {
+    "think":{
+      "config":{
+        "kaadon_captcha": "src/config/kaadon_captcha.php"
+      }
     }
   }
 }
