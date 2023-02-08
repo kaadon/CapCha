@@ -202,7 +202,7 @@ class capcha
         imagepng($this->im, $tmpfname);
         $img_data = file_get_contents($tmpfname);
         if ($api){
-            $create_time = time();
+            $create_time = (string)time();
             $verify['time']       = $create_time;
             $img_base64 = sha1($create_time) . base64_encode($img_data);
         }else{
