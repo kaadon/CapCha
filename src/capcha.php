@@ -201,11 +201,16 @@ class capcha
         $tmpfname = tempnam(sys_get_temp_dir(), 'ya');
         imagepng($this->im, $tmpfname);
         $img_data = file_get_contents($tmpfname);
-        $img_base64 = 'data:image/png;base64,' . base64_encode($img_data);
+        if ($api){
+            $create_time = time();
+            $verify['time']       = $create_time;
+            $img_base64 = sha1($create_time) . base64_encode($img_data);
+        }else{
+            $img_base64 = 'data:image/png;base64,' . base64_encode($img_data);
+        }
         ob_get_clean();
         @unlink($tmpfname);
         imagedestroy($this->im);
-
         $verify['verify_id']  = $generator['key'];
         $verify['verify_src'] = $img_base64;
 
