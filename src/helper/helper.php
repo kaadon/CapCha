@@ -2,11 +2,11 @@
 
 
 if (!function_exists('capcha_create')) {
-    function capcha_create($config = null)
+    function capcha_create($config = null, $api = false)
     {
         try {
             /*执行主体*/
-            return (new \Kaadon\CapCha\capcha())->create($config);
+            return (new \Kaadon\CapCha\capcha())->create($config, $api);
 
         } catch (\Exception $e) {
             throw new \Kaadon\CapCha\CapchaException($e->getMessage());
@@ -15,7 +15,7 @@ if (!function_exists('capcha_create')) {
 }
 
 if (!function_exists('capcha_check')) {
-    function capcha_check(string $verify_id,string  $verify_code)
+    function capcha_check(string $verify_id, string $verify_code)
     {
         try {
             /*执行主体*/
