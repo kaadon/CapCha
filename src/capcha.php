@@ -148,7 +148,7 @@ class capcha
         // 图片高(px)
         $this->imageH || $this->imageH = $this->fontSize * 2.5;
         // 建立一幅 $this->imageW x $this->imageH 的图像
-        $this->im = imagecreate($this->imageW, $this->imageH);
+        $this->im = imagecreate(intval($this->imageW), intval($this->imageH));
         // 设置背景
         imagecolorallocate($this->im, $this->bg[0], $this->bg[1], $this->bg[2]);
 
@@ -190,7 +190,7 @@ class capcha
 
         foreach ($text as $index => $char) {
 
-            $x     = $this->fontSize * ($index + 1) * mt_rand(1.01, 1.2) * ($this->math ? 1 : 1.2);
+            $x     = $this->fontSize * ($index + 1) * mt_rand(intval(1.01), intval(1.2)) * ($this->math ? 1 : 1.2);
             $y     = $this->fontSize + mt_rand(10, 20);
             $angle = $this->math ? 0 : mt_rand(-40, 40);
             putenv('GDFONTPATH=' . realpath('.'));
@@ -234,41 +234,41 @@ class capcha
         $px = $py = 0;
 
         // 曲线前部分
-        $A = mt_rand(1, $this->imageH / 2); // 振幅
-        $b = mt_rand(-$this->imageH / 4, $this->imageH / 4); // Y轴方向偏移量
-        $f = mt_rand(-$this->imageH / 4, $this->imageH / 4); // X轴方向偏移量
-        $T = mt_rand($this->imageH, $this->imageW * 2); // 周期
+        $A = mt_rand(1, intval($this->imageH / 2)); // 振幅
+        $b = mt_rand(-intval($this->imageH / 4), intval($this->imageH / 4)); // Y轴方向偏移量
+        $f = mt_rand(-intval($this->imageH / 4), intval($this->imageH / 4)); // X轴方向偏移量
+        $T = mt_rand(intval($this->imageH), $this->imageW * 2); // 周期
         $w = (2 * M_PI) / $T;
 
         $px1 = 0; // 曲线横坐标起始位置
-        $px2 = mt_rand($this->imageW / 2, $this->imageW * 0.8); // 曲线横坐标结束位置
+        $px2 = mt_rand(intval($this->imageW / 2), $this->imageW * 0.8); // 曲线横坐标结束位置
 
         for ($px = $px1; $px <= $px2; $px = $px + 1) {
             if (0 != $w) {
-                $py = $A * sin($w * $px + $f) + $b + $this->imageH / 2; // y = Asin(ωx+φ) + b
-                $i  = (int) ($this->fontSize / 5);
+                $py = $A * sin($w * $px + $f) + $b + intval($this->imageH / 2); // y = Asin(ωx+φ) + b
+                $i  = intval($this->fontSize / 5);
                 while ($i > 0) {
-                    imagesetpixel($this->im, $px + $i, $py + $i, $this->color); // 这里(while)循环画像素点比imagettftext和imagestring用字体大小一次画出（不用这while循环）性能要好很多
+                    imagesetpixel($this->im, intval($px + $i), intval($py + $i), $this->color); // 这里(while)循环画像素点比imagettftext和imagestring用字体大小一次画出（不用这while循环）性能要好很多
                     $i--;
                 }
             }
         }
 
         // 曲线后部分
-        $A   = mt_rand(1, $this->imageH / 2); // 振幅
-        $f   = mt_rand(-$this->imageH / 4, $this->imageH / 4); // X轴方向偏移量
+        $A   = mt_rand(1, intval($this->imageH / 2)); // 振幅
+        $f   = mt_rand(-intval($this->imageH / 4), intval($this->imageH / 4)); // X轴方向偏移量
         $T   = mt_rand($this->imageH, $this->imageW * 2); // 周期
         $w   = (2 * M_PI) / $T;
-        $b   = $py - $A * sin($w * $px + $f) - $this->imageH / 2;
+        $b   = $py - $A * sin($w * $px + $f) - intval($this->imageH / 2);
         $px1 = $px2;
         $px2 = $this->imageW;
 
         for ($px = $px1; $px <= $px2; $px = $px + 1) {
             if (0 != $w) {
-                $py = $A * sin($w * $px + $f) + $b + $this->imageH / 2; // y = Asin(ωx+φ) + b
+                $py = $A * sin($w * $px + $f) + $b + intval($this->imageH / 2); // y = Asin(ωx+φ) + b
                 $i  = (int) ($this->fontSize / 5);
                 while ($i > 0) {
-                    imagesetpixel($this->im, $px + $i, $py + $i, $this->color);
+                    imagesetpixel($this->im, intval($px + $i), intval($py + $i), $this->color);
                     $i--;
                 }
             }

@@ -9,9 +9,8 @@ require_once "vendor/autoload.php";
 use Kaadon\CapCha\capcha;
 
 try {
-
     /*执行主体*/
     (new capcha())->create();
 } catch (\Exception $e) {
-    var_dump($e->getTrace());
+    var_dump($e->getMessage());
 }

@@ -32,5 +32,8 @@
         "kaadon_captcha": "src/config/kaadon_captcha.php"
       }
     }
+  },
+  "require-dev": {
+    "topthink/framework": "^6.1"
   }
 }
